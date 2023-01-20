@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <%= link_to 'Home', welcome_index_path, :class => "navbar-brand" %></li>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <%= link_to 'Courses', courses_path, :class => "nav-link" %></li>
+        <%= link_to 'Departments', departments_path, :class => "nav-link" %></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<br>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3">
+      <% if session[:admin_id] %>
+        <ul class="list-group">
+            <li class="list-group-item">Name: <%= @admin_name %> </li>
+            <li class="list-group-item">Email: <%= @admin_email %> </li>
+        </ul>
+        <br>
+        <%= button_to 'Logout', logout_path, method: :delete, :class => "btn btn-danger" %>
+      <% end %>
+    </div>
+    <div class="col-9">
+      <h4>Current Departements With Courses</h4>
+      <table class="table table-hover">
+        <thead>
+            <tr>
+            <th>Name</th>
+            <th>Total Courses</th>
+            <th colspan="1"></th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            <% @depts.each do |department| %>
+            <tr>
+                <td><%= department.name %></td>
+                <td><%= department.courses.count %></td>
+                <td>
+                  <p>
+                    <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#see" aria-expanded="false" aria-controls="see">See</button>
+                    <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#manage" aria-expanded="false" aria-controls="manage">Manage</button>
+                  </p>
+                  <div class="collapse multi-collapse" id="see">
+                    <div class="card card-body">
+                      <%= department.courses %>
+                    </div>
+                  </div>
+                  <div class="collapse multi-collapse" id="manage">
+                    <div class="card card-body">
+                      Some placeholder content for the second collapse component of this multi-collapse example. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                    </div>
+                  </div>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

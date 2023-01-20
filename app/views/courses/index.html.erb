@@ -1,0 +1,46 @@
+<% if notice %>
+  <aside id="notice"><%= notice %></aside>
+<% end %>
+
+<h1>Courses</h1>
+
+<table class="table table-hover table align-middle">
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Prerequisite</th>
+      <th>Credit</th>
+      <th>Days</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @courses.each do |course| %>
+      <tr>
+        <td><%= course.code %></td>
+        <td><%= course.title %></td>
+        <td><p>
+        <%= truncate(strip_tags(course.description),
+        length: 80) %>
+        </p></td>
+        <td><%= course.prerequisite %></td>
+        <td><%= course.credit %></td>
+        <td><%= course.days %></td>
+        <td>
+          <ul>
+            <li><%= link_to 'Show', course, :class => "link-primary" %></li>
+            <li><%= link_to 'Edit', edit_course_path(course), :class => "link-success" %></li>
+            <li><%= link_to 'Destroy', course, method: :delete, :class => "link-danger", data: { confirm: 'Are you sure?' } %></li>
+          </ul>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= button_to 'New Course', new_course_path, :class => "btn btn-primary" %>
