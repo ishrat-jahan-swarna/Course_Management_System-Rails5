@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'course_dept/index'
   get 'welcome/index'
   controller :sessions do
     get 'login' => :new

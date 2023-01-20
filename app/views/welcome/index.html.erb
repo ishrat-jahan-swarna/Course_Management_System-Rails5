@@ -42,18 +42,27 @@
                 <td><%= department.name %></td>
                 <td><%= department.courses.count %></td>
                 <td>
+                  <% seeid = "see #{department.id}" %>
                   <p>
-                    <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#see" aria-expanded="false" aria-controls="see">See</button>
+                    <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#" aria-expanded="false" aria-controls= "see" >See</button>
                     <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#manage" aria-expanded="false" aria-controls="manage">Manage</button>
                   </p>
-                  <div class="collapse multi-collapse" id="see">
-                    <div class="card card-body">
-                      <%= department.courses %>
-                    </div>
-                  </div>
-                  <div class="collapse multi-collapse" id="manage">
-                    <div class="card card-body">
-                      Some placeholder content for the second collapse component of this multi-collapse example. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                  <div class="row">
+                    <div class="col">
+                      <div class="collapse multi-collapse" id="see">
+                        <div class="card card-body">
+                          <% department.courses.each do |c| %>
+                            <%= c.code %> <br>
+                          <% end %>
+                        </div>
+                      </div>
+                    <div>
+                    <div class="col">
+                      <div class="collapse multi-collapse" id="manage">
+                        <div class="card card-body">
+                          Some placeholder content for the second collapse component of this multi-collapse example. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </td>
