@@ -8,6 +8,7 @@
       <ul class="navbar-nav">
         <%= link_to 'Courses', courses_path, :class => "nav-link" %></li>
         <%= link_to 'Departments', departments_path, :class => "nav-link" %></li>
+        <%= link_to 'Users', users_path, :class => "nav-link" %></li>
       </ul>
     </div>
   </div>
@@ -25,8 +26,8 @@
         <%= button_to 'Logout', logout_path, method: :delete, :class => "btn btn-danger" %>
       <% end %>
     </div>
-    <div class="col-9">
-      <h4>Current Departements With Courses</h4>
+    <div class="col-4">
+      <h4>Current Departements</h4>
       <table class="table table-hover">
         <thead>
             <tr>
@@ -43,33 +44,26 @@
                 <td><%= department.courses.count %></td>
                 <td>
                   <% seeid = "see #{department.id}" %>
-                  <p>
-                    <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#" aria-expanded="false" aria-controls= "see" >See</button>
-                    <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#manage" aria-expanded="false" aria-controls="manage">Manage</button>
-                  </p>
-                  <div class="row">
-                    <div class="col">
-                      <div class="collapse multi-collapse" id="see">
-                        <div class="card card-body">
-                          <% department.courses.each do |c| %>
-                            <%= c.code %> <br>
-                          <% end %>
-                        </div>
-                      </div>
-                    <div>
-                    <div class="col">
-                      <div class="collapse multi-collapse" id="manage">
-                        <div class="card card-body">
-                          Some placeholder content for the second collapse component of this multi-collapse example. This panel is hidden by default but revealed when the user activates the relevant trigger.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <button onclick="document.getElementById('demo').innerHTML = myFunc(#{department.name})">see/manage courses</button>
+
                 </td>
             </tr>
             <% end %>
         </tbody>
       </table>
     </div>
+    <div class="col-5">
+      <h4>Courses under your selected department</h4>
+      <div>
+        <p id="demo">You didn't select any department.</p>
+      </div>
+    </div>
   </div>
 </div>
+
+<script>
+function myFunc(dname) {
+  var x = "xyz";
+  return x;
+}
+</script>

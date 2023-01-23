@@ -1,4 +1,5 @@
 class WelcomeController < ApplicationController
+  skip_before_action  :authorize_user
   def index
     cadmin = Admin.find_by(id: session[:admin_id])
     @admin_name = cadmin.name
