@@ -1,1 +1,21 @@
-fj
+<h6>All courses for <%= department.name %> </h1>
+
+<table class="table table-hover table align-middle">
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Title</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% department.courses.each do |course| %>
+        <tr>
+        <td><%= course.code %></td>
+        <td><%= course.title %></td>
+        <td><%= link_to 'See Details', course, :class => "link-primary" %></td>
+        </tr>       
+    <% end %>
+  </tbody>
+</table>
