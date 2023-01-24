@@ -46,7 +46,7 @@
                   <%= link_to "Manage Courses", course_dept_index_path(dept_id: department) %>
                 </td>
                 <td>
-                  <%= link_to "See Courses", course_dept_index_path(dept_id: department) %>
+                  <%= link_to "See Courses", course_dept_index_path(dept_id: department), remote: true %>
                 </td>
             </tr>
             <% end %>
@@ -61,10 +61,3 @@
     </div>
   </div>
 </div>
-
-<script>
-function myFunc(y) {
-  y = Number(y);
-  return y;
-}
-</script>
