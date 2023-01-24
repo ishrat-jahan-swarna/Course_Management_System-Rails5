@@ -1,0 +1,28 @@
+<h1>Manage courses for <%= dept.name %> </h1>
+
+<table class="table table-hover table align-middle">
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% courses.each do |course| %>
+        <tr>
+        <td><%= course.code %></td>
+        <td><%= link_to 'See Details', course, :class => "link-primary" %></td>
+        <td>
+        <% if dept.courses.include?(course) %>
+          <%= button_to 'Select to Remove', course_dept_sel_course_path(course_id: course), :class => "btn btn-outline-primary btn-sm" %>
+        <% else %>
+          <%= button_to 'Select to Add', course_dept_sel_course_path(course_id: course), :class => "btn btn-outline-primary btn-sm" %>
+        <% end %>
+        </td>
+        </tr>       
+    <% end %>
+  </tbody>
+</table>
+<%= button_to 'Add Courses', course_dept_add_course_path(dept_id: dept), :class => "btn btn-primary btn-sm " %><br>
+<%= button_to 'Remove Courses', course_dept_remove_course_path(dept_id: dept), :class => "btn btn-primary btn-sm" %>

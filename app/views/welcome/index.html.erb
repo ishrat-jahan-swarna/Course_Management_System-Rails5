@@ -33,7 +33,7 @@
             <tr>
             <th>Name</th>
             <th>Total Courses</th>
-            <th colspan="1"></th>
+            <th colspan="2"></th>
             </tr>
         </thead>
     
@@ -43,9 +43,10 @@
                 <td><%= department.name %></td>
                 <td><%= department.courses.count %></td>
                 <td>
-                  <% seeid = "see #{department.id}" %>
-                  <button onclick="document.getElementById('demo').innerHTML = myFunc(#{department.name})">see/manage courses</button>
-
+                  <%= link_to "Manage Courses", course_dept_index_path(dept_id: department) %>
+                </td>
+                <td>
+                  <%= link_to "See Courses", course_dept_index_path(dept_id: department) %>
                 </td>
             </tr>
             <% end %>
@@ -54,16 +55,16 @@
     </div>
     <div class="col-5">
       <h4>Courses under your selected department</h4>
-      <div>
-        <p id="demo">You didn't select any department.</p>
+      <div id="demo">
+        <p>You didn't select any department.</p>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-function myFunc(dname) {
-  var x = "xyz";
-  return x;
+function myFunc(y) {
+  y = Number(y);
+  return y;
 }
 </script>

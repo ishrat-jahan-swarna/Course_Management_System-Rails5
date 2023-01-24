@@ -1,28 +1,3 @@
-<h1>Manage courses for this department</h1>
-
-<table class="table table-hover table align-middle">
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Title</th>
-      <th>Prerequisite</th>
-      <th>Credit</th>
-      <th>Days</th>
-      <th colspan="1"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @courses.each do |course| %>
-      <tr>
-        <td><%= course.code %></td>
-        <td><%= course.title %></td>
-        <td><%= course.prerequisite %></td>
-        <td><%= course.credit %></td>
-        <td><%= course.days %></td>
-        <td><%= button_to 'Add', logout_path, method: :delete, :class => "btn btn-danger" %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<%= render "course_dept", dept:@dept, courses:@courses %>
+<br>
+<%= link_to 'Cancel', welcome_index_path, :class => "link-danger" %>

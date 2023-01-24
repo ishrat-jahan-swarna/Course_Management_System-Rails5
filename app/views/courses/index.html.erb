@@ -13,6 +13,7 @@
       <th>Prerequisite</th>
       <th>Credit</th>
       <th>Days</th>
+      <th>Enrolled Students</th>
       <th colspan="1"></th>
     </tr>
   </thead>
@@ -24,10 +25,11 @@
         <td><%= course.title %></td>
         <td><p>
         <%= truncate(strip_tags(course.description),
-        length: 80) %>
+        length: 50) %>
         </p></td>
         <td><%= course.prerequisite %></td>
         <td><%= course.credit %></td>
+        <td><%= course.days %></td>
         <td><%= course.days %></td>
         <td>
           <ul>

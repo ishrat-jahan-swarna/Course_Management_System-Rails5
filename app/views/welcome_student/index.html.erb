@@ -1,14 +1,18 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-6">
+        <div class="col-4">
             <ul class="list-group">
                 <li class="list-group-item">Name: <%= @user_name %> </li>
                 <li class="list-group-item">Email: <%= @user_email %> </li>
-            </ul><br>
+            </ul>
+            <br>
+            <%= link_to "Want to update Profile?", logout_user_path, :class => "link-primary" %>
+            <br><br>
+            
             <%= button_to 'Logout', logout_user_path, method: :delete, :class => "btn btn-danger" %>
 
         </div>
-        <div class="col-6">
+        <div class="col-8">
         </div>
     </div>
 </div>

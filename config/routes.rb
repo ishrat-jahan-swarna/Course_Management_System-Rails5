@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'welcome_student/index'
-  
+  post 'course_dept/remove_course'
+  post 'course_dept/add_course'
+  post 'course_dept/sel_course'
   get 'course_dept/index'
   get 'welcome/index'
   controller :sessions do
