@@ -8,6 +8,14 @@ class CourseDeptController < ApplicationController
     @dept = Department.find(params[:dept_id])
     @courses = Course.all
   end
+  
+  def show_courses
+    @dept = Department.find(params[:dept_id])
+    respond_to do |format|
+      format.html{redirect_to welcome_index_path}
+      format.js
+    end
+  end
 
   def sel_course
     @course = Course.find(params[:course_id])
