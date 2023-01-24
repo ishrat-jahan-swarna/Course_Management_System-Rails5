@@ -46,7 +46,7 @@
                   <%= link_to "Manage Courses", course_dept_index_path(dept_id: department) %>
                 </td>
                 <td>
-                  <%= link_to "See Courses", course_dept_index_path(dept_id: department), remote: true %>
+                  <%= link_to "See Courses", course_dept_show_courses_path(dept_id: department), remote: true %>
                 </td>
             </tr>
             <% end %>
