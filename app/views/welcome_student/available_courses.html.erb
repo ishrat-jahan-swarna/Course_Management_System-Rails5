@@ -1,6 +1,27 @@
 <% if @user.user_profile %>
     <% dept = @user.user_profile.department %>
     <h6>Available Courses for <%= dept.name %> to enroll now</h6>
+    <table class="table table-hover table align-middle">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Title</th>
+                <th>Credit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% dept.courses.each do |course| %>
+                <tr>
+                <td><%= course.code %></td>
+                <td><%= course.title %></td>
+                <td><%= course.credit %></td>
+                <td><%= link_to 'See Details', course, :class => "link-primary" %></td>
+                <td><%= button_to 'Select to Enroll', welcome_student_sel_to_enroll_path(course_id: course), :class => "btn btn-outline-primary btn-sm" %></td>
+                </tr>       
+            <% end %>
+        </tbody>
+    </table
+    <%= button_to 'Register for new semester', welcome_student_enroll_courses_path(u_id: @user.id), :class => "btn btn-primary" %>
 <% else %>
     <h6>Please set your profile first.</h6>
 <% end %>
