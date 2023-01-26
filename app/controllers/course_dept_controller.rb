@@ -18,7 +18,6 @@ class CourseDeptController < ApplicationController
   end
 
   def show_courses_user
-    puts params[:dept_id]
     if params[:dept_id] != "-1"
       @dept = Department.find(params[:dept_id])
     else

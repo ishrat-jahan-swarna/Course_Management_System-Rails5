@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :user_profiles
+  post 'welcome_student/available_courses'
+  get 'welcome_student/available_courses'
   get 'departments/show_user'
   get 'course_dept/show_courses_user'
   get 'welcome_student/index'

@@ -7,6 +7,9 @@ class WelcomeStudentController < ApplicationController
     @user_id = cuser.id
     @user_name = cuser.name
     @user_email = cuser.email
-    
+  end
+
+  def available_courses
+    @user = User.find(params[:u_id])
   end
 end

@@ -1,0 +1,6 @@
+<% if @user.user_profile %>
+    <% dept = @user.user_profile.department %>
+    <h6>Available Courses for <%= dept.name %> to enroll now</h6>
+<% else %>
+    <h6>Please set your profile first.</h6>
+<% end %>

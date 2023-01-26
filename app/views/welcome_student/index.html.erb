@@ -56,7 +56,7 @@
                   <% if @user.courses.count == 0 %>
                     <p class="card-text">Nothing to show now.</p>
                   <% end %>
-                  <a href="#" class="btn btn-primary btn-sm">Enroll for new semester</a>
+                  <%= button_to 'Enroll for new semester', welcome_student_available_courses_path(u_id: @user_id), :class => 'btn btn-primary btn-sm' %>
                 </div>
               </div>
             </div>
