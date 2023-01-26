@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :user_profiles
+  post 'welcome_student/enroll_courses'
+  post 'welcome_student/sel_to_enroll'
   post 'welcome_student/available_courses'
   get 'welcome_student/available_courses'
   get 'departments/show_user'
@@ -30,3 +32,4 @@ Rails.application.routes.draw do
   resources :courses
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
+
