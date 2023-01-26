@@ -8,6 +8,10 @@ class DepartmentsController < ApplicationController
   def show
   end
 
+  def show_user 
+    @dept = Department.find(params[:dept])
+  end
+
     # GET /courses/new
   def new
     @department = Department.new

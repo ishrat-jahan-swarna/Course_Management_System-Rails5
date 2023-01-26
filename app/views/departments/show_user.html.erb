@@ -1,0 +1,27 @@
+<h1>Students in this department</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @dept.user_profiles %>
+        <% @dept.user_profiles.each do |up| %>
+            <tr>
+                <td><%= up.user.name %></td>
+                <td><%= up.user.email %></td>
+            </tr>
+        <% end %>
+    <% else %>
+        <tr>
+            <td>No student</td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>

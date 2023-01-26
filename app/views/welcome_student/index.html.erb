@@ -1,18 +1,79 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <%= link_to 'Home', welcome_student_index_path, :class => "navbar-brand" %></li>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+      <% if @user.user_profile %>
+        <%= link_to 'Courses', course_dept_show_courses_user_path(dept_id: @user.user_profile.department_id ), :class => "nav-link" %></li>
+      <% else %>
+        <%= link_to 'Courses', course_dept_show_courses_user_path(dept_id: "-1" ), :class => "nav-link" %></li>  
+      <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+<br>
 <div class="container-fluid">
     <div class="row">
         <div class="col-4">
-            <ul class="list-group">
-                <li class="list-group-item">Name: <%= @user_name %> </li>
-                <li class="list-group-item">Email: <%= @user_email %> </li>
-            </ul>
+          <ul class="list-group">
+            <% if @user.user_profile %>
+              <li class="list-group-item"><%= image_tag @user.user_profile.profile_picture, :style =>'width:60%' %></li>
+            <% end %>  
+            <li class="list-group-item">Name: <%= @user_name %> </li>
+            <li class="list-group-item">Email: <%= @user_email %> </li>
+            <% if @user.user_profile %>  
+              <% dept = Department.find_by(id: @user.user_profile.department_id) %>
+              <% dept_name = dept.name %>
+              <li class="list-group-item">Department: <%= dept_name %> </li>
+              <li class="list-group-item">Current Semester: <%= @user.user_profile.current_semester %> </li>
+              <li class="list-group-item">Address: <%= @user.user_profile.address %> </li>
+              <li class="list-group-item">Blood Group: <%= @user.user_profile.blood_group %> </li>
+            <% end %>
+          </ul>
+          <% if @user.user_profile %> 
             <br>
-            <%= link_to "Want to update Profile?", logout_user_path, :class => "link-primary" %>
+            <%= link_to "Want to update Information?", edit_user_profile_path(@user.user_profile, u_id: @user_id), :class => "link-primary" %>
             <br><br>
-            
-            <%= button_to 'Logout', logout_user_path, method: :delete, :class => "btn btn-danger" %>
-
+          <% else %>
+            <br>
+            <%= link_to "Want to set your profile?", new_user_profile_path(u_id: @user_id), :class => "link-primary" %>
+            <br>
+          <% end %>
+          <br>
+          <%= button_to 'Logout', logout_user_path, method: :delete, :class => "btn btn-danger" %>
         </div>
+
         <div class="col-8">
+          <div class="row">
+            <div class="col-6">
+              <div class="card" style="width: 100%;">
+                <div class="card-body">
+                  <h5 class="card-title">You have enrolled <%= @user.courses.count %> courses for the current semester.</h5>
+                  <% if @user.courses.count == 0 %>
+                    <p class="card-text">Nothing to show now.</p>
+                  <% end %>
+                  <a href="#" class="btn btn-primary btn-sm">Enroll for new semester</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="card" style="width: 100%;">
+                <div class="card-body">
+                  <h5 class="card-title">You have passed 0 courses</h5>
+                    <% if @user.user_profile %> 
+                      <p class="card-text">You need to pass <%= dept.courses.count %> courses more.</p>
+                    <% else %>
+                      <p class="card-text">Complete your profile setup first and enroll courses to pass.</p>
+                    <% end %>
+                    <a href="#" class="btn btn-primary btn-sm">See them</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
     </div>
 </div>

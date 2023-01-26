@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <%= image_tag(@user_profile.profile_picture) %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @user_profile.department_id %>
+</p>
+
+<p>
+  <strong>Current semester:</strong>
+  <%= @user_profile.current_semester %>
+</p>
+
+<p>
+  <strong>Blood group:</strong>
+  <%= @user_profile.blood_group %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @user_profile.address %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @user_profile.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_user_profile_path(@user_profile) %> |
+<%= link_to 'Back', user_profiles_path %>

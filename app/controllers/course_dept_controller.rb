@@ -17,6 +17,15 @@ class CourseDeptController < ApplicationController
     end
   end
 
+  def show_courses_user
+    puts params[:dept_id]
+    if params[:dept_id] != "-1"
+      @dept = Department.find(params[:dept_id])
+    else
+      @check = 1
+    end
+  end
+
   def sel_course
     @course = Course.find(params[:course_id])
     @@selected_courses.append(@course)
@@ -25,14 +34,14 @@ class CourseDeptController < ApplicationController
   def add_course
     @dept = Department.find(params[:dept_id])
     @dept.courses.push(@@selected_courses)
-    @selected_courses = []
+    @@selected_courses = []
     redirect_to welcome_index_path
   end
 
   def remove_course
     @dept = Department.find(params[:dept_id])
     @dept.courses.delete(@@selected_courses)
-    @selected_courses = []
+    @@selected_courses = []
     redirect_to welcome_index_path
   end
 end

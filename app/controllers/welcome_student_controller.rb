@@ -3,6 +3,8 @@ class WelcomeStudentController < ApplicationController
   skip_before_action  :authorize
   def index
     cuser = User.find_by(id: session[:user_id])
+    @user = cuser
+    @user_id = cuser.id
     @user_name = cuser.name
     @user_email = cuser.email
     
