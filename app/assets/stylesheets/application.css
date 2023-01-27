@@ -14,7 +14,7 @@
  *= require_self
  */
  a:hover{
-    background-color: yellow;
+    background-color: #43aefa;
  }
  ul{
    list-style-type: none;

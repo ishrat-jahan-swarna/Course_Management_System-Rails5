@@ -11,6 +11,10 @@ class CoursesController < ApplicationController
   def show
   end
 
+  def show_user 
+    @course = Course.find(params[:course])
+  end
+
   # GET /courses/new
   def new
     @course = Course.new

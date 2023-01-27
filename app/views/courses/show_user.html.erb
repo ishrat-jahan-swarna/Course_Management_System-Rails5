@@ -1,0 +1,27 @@
+<h1>Students in this course</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @course.users %>
+        <% @course.users.each do |up| %>
+            <tr>
+                <td><%= up.name %></td>
+                <td><%= up.email %></td>
+            </tr>
+        <% end %>
+    <% else %>
+        <tr>
+            <td>No student</td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>

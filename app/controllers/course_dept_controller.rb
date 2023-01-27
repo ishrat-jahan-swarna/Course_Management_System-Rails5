@@ -27,10 +27,12 @@ class CourseDeptController < ApplicationController
 
   def sel_course
     @course = Course.find(params[:course_id])
+    puts @course
     @@selected_courses.append(@course)
   end
 
   def add_course
+    puts "I am here"
     @dept = Department.find(params[:dept_id])
     @dept.courses.push(@@selected_courses)
     @@selected_courses = []
