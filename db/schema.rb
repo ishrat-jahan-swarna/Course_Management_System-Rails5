@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_27_111028) do
+ActiveRecord::Schema.define(version: 2023_01_29_115300) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -42,12 +42,12 @@ ActiveRecord::Schema.define(version: 2023_01_27_111028) do
   end
 
   create_table "course_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
-    t.boolean "passed", default: false, null: false
     t.bigint "course_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "semester", default: 1
+    t.integer "result", default: 0
     t.index ["course_id"], name: "index_course_users_on_course_id"
     t.index ["user_id"], name: "index_course_users_on_user_id"
   end
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2023_01_27_111028) do
     t.integer "days", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "semester", default: 1
   end
 
   create_table "courses_departments", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|

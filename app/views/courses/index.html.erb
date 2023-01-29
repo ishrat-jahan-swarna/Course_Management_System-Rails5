@@ -13,6 +13,7 @@
       <th>Prerequisite</th>
       <th>Credit</th>
       <th>Days</th>
+      <th>Semester</th>
       <th>Enrolled Students</th>
       <th colspan="1"></th>
     </tr>
@@ -30,6 +31,7 @@
         <td><%= course.prerequisite %></td>
         <td><%= course.credit %></td>
         <td><%= course.days %></td>
+        <td><%= course.semester %></td>
         <td><%= link_to course.users.count, courses_show_user_path(course: course) %></td>
         <td>
           <ul>

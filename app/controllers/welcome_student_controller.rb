@@ -31,10 +31,13 @@ class WelcomeStudentController < ApplicationController
 
   def enroll_courses
     @user = User.find(params[:u_id])
+    @ucs = @user.user_profile.current_semester
     @total_credit = @@selected_courses.to_a.sum{|course| course.credit}
 
     if @@selected_courses.count >= 2 && @@selected_courses.count <=8 && @total_credit < 40
-      @user.courses.push(@@selected_courses)
+      @@selected_courses.each do |sc|
+        CourseUser.create(course_id: sc.id, user_id: @user.id, semester: @ucs+1)
+      end
       @user.user_profile.current_semester += 1
       @user.user_profile.save
     end
