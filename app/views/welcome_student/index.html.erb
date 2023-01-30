@@ -52,13 +52,14 @@
             <div class="col-6">
               <div class="card" style="width: 100%;">
                 <div class="card-body">
-                  <h5 class="card-title">You have enrolled <%= @user.courses.count %> courses for the current semester.</h5>
-                  <% if @user.courses.count == 0 %>
+                  <h5 class="card-title">You have enrolled <%= @user_curr_courses.count %> courses for the current semester.</h5>
+                  <% if @user_curr_courses.count == 0 %>
                     <p class="card-text">Nothing to show now.</p>
                   <% else %>
                     <ul class="list-group">
                       <% @user_curr_courses_info.each do |uc| %>
-                        <li class="list-group-item"><%= uc[:code] %><br><%= uc[:title] %></li>
+                        <li class="list-group-item"><%= uc[:code] %><br><%= uc[:title] %>
+                        <br><b>Result: <%= uc[:status] %></b></li>
                       <% end %>
                     </ul>
                   <% end %> <br>
@@ -69,13 +70,13 @@
             <div class="col-6">
               <div class="card" style="width: 100%;">
                 <div class="card-body">
-                  <h5 class="card-title">You have passed 0 courses</h5>
+                  <h5 class="card-title">You have passed <%= @user_passed_courses.count %> courses</h5>
                     <% if @user.user_profile %> 
-                      <p class="card-text">You need to pass <%= dept.courses.count %> courses more.</p>
+                      <p class="card-text">You need to pass <%= dept.courses.count - @user_passed_courses.count %> courses more.</p>
                     <% else %>
                       <p class="card-text">Complete your profile setup first and enroll courses to pass.</p>
                     <% end %>
-                    <a href="#" class="btn btn-primary btn-sm">See them</a>
+                    <%= button_to 'See Details', welcome_student_course_status_path, :class => "btn btn-primary btn-sm" %>
                 </div>
               </div>
             </div>

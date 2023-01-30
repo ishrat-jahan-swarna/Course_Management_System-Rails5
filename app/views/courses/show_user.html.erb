@@ -1,5 +1,6 @@
 <h1>Students in this course</h1>
 
+
 <table class="table table-hover">
   <thead>
     <tr>
@@ -11,10 +12,11 @@
 
   <tbody>
     <% if @course.users %>
-        <% @course.users.each do |up| %>
+        <% @course.users.each do |cu| %>
             <tr>
-                <td><%= up.name %></td>
-                <td><%= up.email %></td>
+                <td><%= cu.name %></td>
+                <td><%= cu.email %></td>
+                <td><%= link_to 'See Details', cu %></td>
             </tr>
         <% end %>
     <% else %>

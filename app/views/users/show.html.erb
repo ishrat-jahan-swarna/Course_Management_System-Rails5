@@ -1,14 +1,56 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+<div class="row">
+  <div class="col">
+    <p>
+      <strong>Name:</strong>
+      <%= @user.name %>
+    </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+    <p>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </p>
+
+    <% if @user.user_profile %>
+      <p>
+        <strong>Department:</strong>
+        <%= @user.user_profile.department.name %>
+      </p>
+
+      <p>
+        <strong>Current Semester:</strong>
+        <%= @user.user_profile.current_semester %>
+      </p>
+      <p>
+        <strong>Enrolled Courses for the current semester: </strong>
+        <% if @user_curr_courses.count == 0 %>
+          <p class="card-text">User hasn't enrolled any course yet.</p>
+          <% else %>
+            <ul class="list-group">
+              <% @user_curr_courses_info.each do |uc| %>
+                <li class="list-group-item"><%= uc[:code] %><br><%= uc[:title] %>
+                <br><b>Result: <%= uc[:status] %></b></li>
+              <% end %>
+            </ul>
+          <% end %> <br>
+          </p>
+
+      <!-- want to show the courses in the current Semester -->
+
+
+
+
+    <% else %>
+      <p>User hasn't set profile yet.</p>
+    <% end %>
+  </div>
+  <div class="col">
+  </div>
+</div>
+
+
+
 
 <!-- <%= link_to 'Edit', edit_user_path(@user) %> | -->
 <%= link_to 'Back', users_path %>

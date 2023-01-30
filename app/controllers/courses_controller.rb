@@ -1,6 +1,7 @@
 class CoursesController < ApplicationController
   skip_before_action  :authorize_user
   before_action :set_course, only: %i[ show edit update destroy ]
+  skip_before_action  :authorize, only: %i[ show_courses_user]
 
   # GET /courses or /courses.json
   def index
@@ -12,6 +13,12 @@ class CoursesController < ApplicationController
   end
 
   def show_user 
+    @course = Course.find(params[:course])
+  end
+
+  def show_courses_user
+    puts "I am in show courses user"
+    puts params[:course]
     @course = Course.find(params[:course])
   end
 

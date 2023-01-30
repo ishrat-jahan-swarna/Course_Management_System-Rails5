@@ -10,6 +10,19 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
+    @ucs = @user.user_profile.current_semester
+    @user_curr_courses = CourseUser.where(user_id: @user.id, semester: @ucs)
+    @user_curr_courses_info = []
+    @user_curr_courses.each do |uc|
+      @c = Course.find_by(id: uc.course_id)
+      @s = "pending"
+      if uc.result == 1
+        @s = "passed"
+      elsif uc.result == 2
+        @s = "failed"
+      end
+      @user_curr_courses_info.append(code:@c.code, title:@c.title, status:@s)
+    end
   end
 
   # GET /users/new

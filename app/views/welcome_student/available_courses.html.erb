@@ -1,5 +1,6 @@
 <% if @user.user_profile %>
     <% dept = @user.user_profile.department %>
+    <% ucs = @user.user_profile.current_semester + 1 %>
     <h2>Available Courses in <%= dept.name %> to enroll now</h2>
     <table class="table table-hover table align-middle">
         <thead>
@@ -12,17 +13,25 @@
         </thead>
         <tbody>
             <% dept.courses.each do |course| %>
-                <tr>
-                <td><%= course.code %></td>
-                <td><%= course.title %></td>
-                <td><%= course.credit %></td>
-                <td><%= link_to 'See Details', course, :class => "link-primary" %></td>
-                <td><%= button_to 'Select to Enroll', welcome_student_sel_to_enroll_path(course_id: course.id), :class => "btn btn-outline-primary btn-sm" %></td>
-                </tr>       
+                <% if course.semester == ucs %>
+                    <tr>
+                    <td><%= course.code %></td>
+                    <td><%= course.title %></td>
+                    <td><%= course.credit %></td>
+                    <td><%= link_to 'See Details', courses_show_courses_user_path(course: course), :class => "link-primary" %></td>
+                    <td><%= button_to 'Select to Enroll', welcome_student_sel_to_enroll_path(course_id: course.id), :class => "btn btn-outline-primary btn-sm" %></td>
+                    </tr>  
+                <% end %>
             <% end %>
         </tbody>
     </table>
-    <%= button_to 'Register for new semester', welcome_student_enroll_courses_path(u_id: @user.id), :class => "btn btn-primary btn-sm " %>
+    <br>
+    <% if @notice != nil%>
+        <b><%= @notice %></b>
+    <% else %>
+        <%= button_to 'Register for new semester', welcome_student_enroll_courses_path(u_id: @user.id), :class => "btn btn-primary btn-sm " %>
+    <% end %>
+    
 <% else %>
     <h6>Please set your profile first.</h6>
 <% end %>
