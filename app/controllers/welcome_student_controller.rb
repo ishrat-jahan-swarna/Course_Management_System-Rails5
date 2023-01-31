@@ -44,9 +44,8 @@ class WelcomeStudentController < ApplicationController
   def enroll_courses
     @user = User.find(params[:u_id])
     @ucs = @user.user_profile.current_semester
-    @total_credit = @@selected_courses.to_a.sum{|course| course.credit}
 
-    if @@selected_courses.count >= 1 && @@selected_courses.count <=8 && @total_credit < 40
+    if valid_selected_course
       @@selected_courses.each do |sc|
         CourseUser.create(course_id: sc.id, user_id: @user.id, semester: @ucs+1)
       end
@@ -58,6 +57,52 @@ class WelcomeStudentController < ApplicationController
   end
 
   def course_status
+    @user = User.find(params[:u_id])
+    @ucs = @user.user_profile.current_semester
+    @user_curr_pass = CourseUser.where(user_id:@user.id, semester:@ucs, result:1)
+    @user_all_pass = CourseUser.where(user_id:@user.id, result:1)
+    @user_all_fail = CourseUser.where(user_id:@user.id, result:2)
 
+    @user_curr_pass_info = []
+    @user_curr_pass.each do |uc|
+      @c = Course.find_by(id: uc.course_id)
+      @user_curr_pass_info.append(code:@c.code, title:@c.title)
+    end
+
+    @user_all_pass_info = []
+    if @user_all_pass_info.count 
+      @user_all_pass.each do |uc|
+        @c = Course.find_by(id: uc.course_id)
+        if uc.semester < @ucs
+          @user_all_pass_info.append(code:@c.code, title:@c.title)
+        end
+      end
+    end
+
+    @user_all_fail_info = []
+    @user_all_fail.each do |uc|
+      @c = Course.find_by(id: uc.course_id)
+      @user_all_fail_info.append(code:@c.code, title:@c.title)
+    end
+  end
+
+  private
+  def valid_selected_course
+    @x=1
+    @p = @user.user_profile.department.courses.where(semester:@ucs+1, option:"mandatory")
+    @p.each do |pc|
+      if @@selected_courses.include? pc
+        @x = @x + 1
+      else
+        @x=0
+        return false
+      end
+    end
+    @total_credit = @@selected_courses.to_a.sum{|course| course.credit}
+    if @@selected_courses.count >= 1 && @@selected_courses.count <=8 && @total_credit < 40 && @x>0
+      return true
+    else
+      return false
+    end
   end
 end

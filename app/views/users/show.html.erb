@@ -26,16 +26,28 @@
         <strong>Enrolled Courses for the current semester: </strong>
         <% if @user_curr_courses.count == 0 %>
           <p class="card-text">User hasn't enrolled any course yet.</p>
-          <% else %>
-            <ul class="list-group">
-              <% @user_curr_courses_info.each do |uc| %>
-                <li class="list-group-item"><%= uc[:code] %><br><%= uc[:title] %>
-                <br><b>Result: <%= uc[:status] %></b></li>
-              <% end %>
-            </ul>
-          <% end %> <br>
-          </p>
-
+        <% else %>
+          <ul class="list-group">
+            <% @user_curr_courses_info.each do |uc| %>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col">
+                  <%= uc[:code] %><br><%= uc[:title] %><br>
+                  <b>Result: <%= uc[:status] %></b>
+                  </div>
+                  <div class="col" style="text-align:right">
+                    <b>Set Result</b><br>
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                      <%= button_to 'Pass', users_set_pass_path(c_id: uc[:c_id], u_id: uc[:u_id]), :class => 'btn btn-success btn-sm' %>
+                      <%= button_to 'Fail', users_set_fail_path(c_id: uc[:c_id], u_id: uc[:u_id]), :class => 'btn btn-danger btn-sm' %>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        <% end %> <br>
+      </p>
       <!-- want to show the courses in the current Semester -->
 
 

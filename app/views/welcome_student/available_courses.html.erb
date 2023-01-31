@@ -1,23 +1,25 @@
 <% if @user.user_profile %>
     <% dept = @user.user_profile.department %>
-    <% ucs = @user.user_profile.current_semester + 1 %>
+    <% uns = @user.user_profile.current_semester + 1 %>
     <h2>Available Courses in <%= dept.name %> to enroll now</h2>
+    <p><b>Note:</b> To register for new semester you need to select at least 5 courses and at most 8 courses. Total Credit of your selected Courses must be between 30.00 and 40.00. Also, you can't register unless you select all the mandatory courses.</p>
     <table class="table table-hover table align-middle">
         <thead>
             <tr>
                 <th>Code</th>
                 <th>Title</th>
                 <th>Credit</th>
-                <th colspan="2"></th>
+                <th colspan="3"></th>
             </tr>
         </thead>
         <tbody>
             <% dept.courses.each do |course| %>
-                <% if course.semester == ucs %>
+                <% if course.semester == uns %>
                     <tr>
                     <td><%= course.code %></td>
                     <td><%= course.title %></td>
                     <td><%= course.credit %></td>
+                    <td><b><%= course.option %></b></td>
                     <td><%= link_to 'See Details', courses_show_courses_user_path(course: course), :class => "link-primary" %></td>
                     <td><%= button_to 'Select to Enroll', welcome_student_sel_to_enroll_path(course_id: course.id), :class => "btn btn-outline-primary btn-sm" %></td>
                     </tr>  
@@ -26,10 +28,10 @@
         </tbody>
     </table>
     <br>
-    <% if @notice != nil%>
-        <b><%= @notice %></b>
-    <% else %>
+    <% if @notice == "" %>
         <%= button_to 'Register for new semester', welcome_student_enroll_courses_path(u_id: @user.id), :class => "btn btn-primary btn-sm " %>
+    <% else %>
+        <b><%= @notice %></b>
     <% end %>
     
 <% else %>

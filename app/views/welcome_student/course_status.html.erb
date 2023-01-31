@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col">
+        <h5>Courses you have passed in this semester</h5>
+        <% if @user_curr_pass_info.count == 0 %>
+            <p class="card-text">Nothing to show now.</p>
+        <% else %>
+        <ul class="list-group">
+            <% @user_curr_pass_info.each do |uc| %>
+            <li class="list-group-item"><%= uc[:code] %><br><%= uc[:title] %></li>
+            <% end %>
+        </ul>
+        <% end %> <br>
+    </div>
+    <div class="col">
+        <h5>Courses you have passed before</h5>
+        <% if @user_all_pass_info.count == 0 %>
+            <p class="card-text">Nothing to show now.</p>
+        <% else %>
+        <ul class="list-group">
+            <% @user_all_pass_info.each do |uc| %>
+            <li class="list-group-item"><%= uc[:code] %><br><%= uc[:title] %></li>
+            <% end %>
+        </ul>
+        <% end %> <br>
+    </div>
+    <div class="col">
+        <h5>Courses you need to register for Backlog</h5>
+        <% if @user_all_fail.count == 0 %>
+            <p class="card-text">Nothing to show now.</p>
+        <% else %>
+        <ul class="list-group">
+            <% @user_all_fail_info.each do |uc| %>
+            <li class="list-group-item"><%= uc[:code] %><br><%= uc[:title] %></li>
+            <% end %>
+        </ul>
+        <% end %> <br>
+    </div>
+</div>

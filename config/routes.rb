@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :user_profiles
+  post 'users/set_fail'
+  post 'users/set_pass'
   post 'welcome_student/course_status'
   get 'courses/show_courses_user'
   get 'courses/show_user'

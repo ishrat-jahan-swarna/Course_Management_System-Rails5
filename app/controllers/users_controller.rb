@@ -3,6 +3,9 @@ class UsersController < ApplicationController
   skip_before_action  :authorize_user
   before_action :set_user, only: %i[ show edit update destroy ]
 
+  def redirect_url
+    request.referrer
+  end
   # GET /users or /users.json
   def index
     @users = User.all
@@ -21,8 +24,26 @@ class UsersController < ApplicationController
       elsif uc.result == 2
         @s = "failed"
       end
-      @user_curr_courses_info.append(code:@c.code, title:@c.title, status:@s)
+      @user_curr_courses_info.append(code:@c.code, title:@c.title, status:@s, c_id: @c.id, u_id:@user.id)
     end
+  end
+
+  def set_pass
+    @user = User.find(params[:u_id])
+    @course = Course.find(params[:c_id])
+    @uc = CourseUser.where(user_id: @user.id, course_id: @course.id)
+    @uc[0].result = 1 
+    @uc[0].save!
+    redirect_to @user
+  end
+
+  def set_fail
+    @user = User.find(params[:u_id])
+    @course = Course.find(params[:c_id])
+    @uc = CourseUser.where(user_id: @user.id, course_id: @course.id)
+    @uc[0].result = 2
+    @uc[0].save!
+    redirect_to @user
   end
 
   # GET /users/new
