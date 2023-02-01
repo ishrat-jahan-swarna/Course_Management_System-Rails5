@@ -69,6 +69,7 @@
                         <br><b>Result: <%= uc[:status] %></b></li>
                       <% end %>
                     </ul>
+                    <br>
                     <%= button_to 'Enroll for new semester', welcome_student_available_courses_path(u_id: @user_id), :class => 'btn btn-primary btn-sm' %>
                   <% elsif @check == 2 %>
                     <h5 class="card-title">You haven't enrolled yet.</h5>
