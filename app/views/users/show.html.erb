@@ -12,7 +12,7 @@
       <%= @user.email %>
     </p>
 
-    <% if @user.user_profile %>
+    <% if @user.user_profile.approved %>
       <p>
         <strong>Department:</strong>
         <%= @user.user_profile.department.name %>
@@ -50,11 +50,20 @@
       </p>
       <!-- want to show the courses in the current Semester -->
 
+    <% elsif @user.user_profile && @user.user_profile.approved==false %>
+      <p>
+        <strong>Department:</strong>
+        <%= @user.user_profile.department.name %>
+      </p>
 
-
-
+      <p>
+        <strong>Current Semester:</strong>
+        <%= @user.user_profile.current_semester %>
+      </p>
+      <%= button_to "Approve User", users_approve_user_path(u_id: @user.id), :class=>"btn btn-success btn-sm" %>
+        
     <% else %>
-      <p>User hasn't set profile yet.</p>
+      <p>User hasn't set profile yet.</p>        
     <% end %>
   </div>
   <div class="col">

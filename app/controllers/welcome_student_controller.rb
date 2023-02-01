@@ -11,18 +11,28 @@ class WelcomeStudentController < ApplicationController
     @user_name = cuser.name
     @user_email = cuser.email
 
-    @user_passed_courses = CourseUser.where(user_id: @user_id, result: 1)
-    @user_curr_courses = CourseUser.where(user_id: @user_id, semester: @user.user_profile.current_semester)
-    @user_curr_courses_info = []
-    @user_curr_courses.each do |uc|
-      @c = Course.find_by(id: uc.course_id)
-      @s = "pending"
-      if uc.result == 1
-        @s = "passed"
-      elsif uc.result == 2
-        @s = "failed"
+    if @user.user_profile == nil
+      @check = 1
+    elsif @user.user_profile && @user.user_profile.approved==false
+      @check = 2
+    else
+      @check = 3
+    end
+
+    if @check==3
+      @user_passed_courses = CourseUser.where(user_id: @user_id, result: 1)
+      @user_curr_courses = CourseUser.where(user_id: @user_id, semester: @user.user_profile.current_semester)
+      @user_curr_courses_info = []
+      @user_curr_courses.each do |uc|
+        @c = Course.find_by(id: uc.course_id)
+        @s = "pending"
+        if uc.result == 1
+          @s = "passed"
+        elsif uc.result == 2
+          @s = "failed"
+        end
+        @user_curr_courses_info.append(code:@c.code, title:@c.title, status:@s)
       end
-      @user_curr_courses_info.append(code:@c.code, title:@c.title, status:@s)
     end
   end
 

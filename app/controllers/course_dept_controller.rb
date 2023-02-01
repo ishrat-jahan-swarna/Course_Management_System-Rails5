@@ -18,10 +18,12 @@ class CourseDeptController < ApplicationController
   end
 
   def show_courses_user
-    if params[:dept_id] != "-1"
-      @dept = Department.find(params[:dept_id])
+    if params[:dept_id] == "-2"
+      @ch = 2
+    elsif params[:dept_id] == "-1"
+      @ch = 1
     else
-      @check = 1
+      @dept = Department.find(params[:dept_id])
     end
   end
 

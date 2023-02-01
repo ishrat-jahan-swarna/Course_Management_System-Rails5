@@ -1,5 +1,7 @@
-<% if @check == 1 %>
-    <h6> You haven't set your profile yet. </h6>
+<% if @ch == 1 %>
+  <h6> You haven't set your profile yet. </h6>
+<% elsif @ch == 2 %>
+  <h6> Sorry, your profile hasn't been approved yet. </h6>
 <% else %>
 <h1>All courses for <%= @dept.name %> </h1>
 

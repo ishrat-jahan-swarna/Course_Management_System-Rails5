@@ -7,8 +7,9 @@ class UsersController < ApplicationController
     request.referrer
   end
   # GET /users or /users.json
-  def index
-    @users = User.all
+  def index 
+    @awaited_users = User.joins(:user_profile).where({ user_profiles: { approved: false } })
+    @users = User.joins(:user_profile).where({ user_profiles: { approved: true } })
   end
 
   # GET /users/1 or /users/1.json
@@ -91,6 +92,14 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url, notice: "User was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def approve_user
+    @user = User.find(params[:u_id])
+    @up = UserProfile.find_by(user_id: @user.id)
+    @up.approved = true 
+    @up.save!
+    redirect_to @user
   end
 
   private

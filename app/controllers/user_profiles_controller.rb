@@ -23,6 +23,8 @@ class UserProfilesController < ApplicationController
   def edit
     @user = User.find(params[:u_id])
     @uid = @user.id
+    @dept_id = @user.user_profile.department_id
+    @csem = @user.user_profile.current_semester
   end
 
   # POST /user_profiles or /user_profiles.json

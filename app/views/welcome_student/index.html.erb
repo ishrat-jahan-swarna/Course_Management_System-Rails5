@@ -6,8 +6,10 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-      <% if @user.user_profile %>
+      <% if @check==3 %>
         <%= link_to 'Courses', course_dept_show_courses_user_path(dept_id: @user.user_profile.department_id ), :class => "nav-link" %></li>
+      <% elsif @check==2 %>
+        <%= link_to 'Courses', course_dept_show_courses_user_path(dept_id: "-2" ), :class => "nav-link" %></li>  
       <% else %>
         <%= link_to 'Courses', course_dept_show_courses_user_path(dept_id: "-1" ), :class => "nav-link" %></li>  
       <% end %>
@@ -20,12 +22,12 @@
     <div class="row">
         <div class="col-4">
           <ul class="list-group">
-            <% if @user.user_profile %>
+            <% if @check==3 %>
               <li class="list-group-item"><%= image_tag @user.user_profile.profile_picture, :style =>'width:60%' %></li>
             <% end %>  
             <li class="list-group-item">Name: <%= @user_name %> </li>
             <li class="list-group-item">Email: <%= @user_email %> </li>
-            <% if @user.user_profile %>  
+            <% if @check==3 %>  
               <% dept = Department.find_by(id: @user.user_profile.department_id) %>
               <% dept_name = dept.name %>
               <li class="list-group-item">Department: <%= dept_name %> </li>
@@ -34,9 +36,13 @@
               <li class="list-group-item">Blood Group: <%= @user.user_profile.blood_group %> </li>
             <% end %>
           </ul>
-          <% if @user.user_profile %> 
+          <% if @check==3 %>
             <br>
             <%= link_to "Want to update Information?", edit_user_profile_path(@user.user_profile, u_id: @user_id), :class => "link-primary" %>
+            <br>
+          <% elsif @check==2 %> 
+            <br>
+            <b>You've set your profile. Please wait for admin approval.</b>
             <br><br>
           <% else %>
             <br>
@@ -52,31 +58,40 @@
             <div class="col-6">
               <div class="card" style="width: 100%;">
                 <div class="card-body">
-                  <h5 class="card-title">You have enrolled <%= @user_curr_courses.count %> courses for the current semester.</h5>
-                  <% if @user_curr_courses.count == 0 %>
-                    <p class="card-text">Nothing to show now.</p>
-                  <% else %>
+                  <% if @check==3 %>
+                    <h5 class="card-title">You have enrolled <%= @user_curr_courses.count %> courses for the current semester.</h5>
+                    <% if @user_curr_courses.count == 0 %>
+                      <p class="card-text">Nothing to show now.</p>
+                    <% end %>
                     <ul class="list-group">
                       <% @user_curr_courses_info.each do |uc| %>
                         <li class="list-group-item"><%= uc[:code] %><br><%= uc[:title] %>
                         <br><b>Result: <%= uc[:status] %></b></li>
                       <% end %>
                     </ul>
+                    <%= button_to 'Enroll for new semester', welcome_student_available_courses_path(u_id: @user_id), :class => 'btn btn-primary btn-sm' %>
+                  <% elsif @check == 2 %>
+                    <h5 class="card-title">You haven't enrolled yet.</h5>
+                    <p class="card-text">Please wait for admin approval first.</p>
+                  <% else %>
+                    <h5 class="card-title">You haven't set your profile yet.</h5>
+                    <p class="card-text">Complete your profile setup first to be able to enroll.</p>
                   <% end %> <br>
-                  <%= button_to 'Enroll for new semester', welcome_student_available_courses_path(u_id: @user_id), :class => 'btn btn-primary btn-sm' %>
                 </div>
               </div>
             </div>
             <div class="col-6">
               <div class="card" style="width: 100%;">
                 <div class="card-body">
-                  <h5 class="card-title">You have passed <%= @user_passed_courses.count %> courses</h5>
-                    <% if @user.user_profile %> 
+                    <% if @check==3 %>
+                      <h5 class="card-title>You have passed <%= @user_passed_courses.count %> courses.</h5>
                       <p class="card-text">You need to pass <%= dept.courses.count - @user_passed_courses.count %> courses more.</p>
+                      <%= button_to 'See Details', welcome_student_course_status_path(u_id: @user), :class => "btn btn-primary btn-sm" %>
+                    <% elsif @check==2 %>
+                      <p class="card-text">Please wait for admin approval.</p>
                     <% else %>
                       <p class="card-text">Complete your profile setup first and enroll courses to pass.</p>
                     <% end %>
-                    <%= button_to 'See Details', welcome_student_course_status_path(u_id: @user), :class => "btn btn-primary btn-sm" %>
                 </div>
               </div>
             </div>
