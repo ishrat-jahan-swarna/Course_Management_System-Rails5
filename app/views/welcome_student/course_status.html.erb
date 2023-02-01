@@ -28,11 +28,22 @@
         <% if @user_all_fail.count == 0 %>
             <p class="card-text">Nothing to show now.</p>
         <% else %>
-        <ul class="list-group">
-            <% @user_all_fail_info.each do |uc| %>
-            <li class="list-group-item"><%= uc[:code] %><br><%= uc[:title] %></li>
-            <% end %>
-        </ul>
+            <ul class="list-group">
+              <% @user_all_fail_info.each do |uc| %>
+                <li class="list-group-item">
+                  <div class="row">
+                    <div class="col">
+                    <%= uc[:code] %><br><%= uc[:title] %><br>
+                    </div>
+                    <div class="col" style="text-align:right">
+                      <%= button_to 'Select', welcome_student_sel_for_backlog_path(course_id: uc[:c_id]), :class => 'btn btn-outline-primary btn-sm' %>
+                    </div>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+            <br>
+            <%= button_to 'Register for Backlog', welcome_student_reg_backlog_path(u_id: @user.id), :class => 'btn btn-primary btn-sm' %>
         <% end %> <br>
     </div>
 </div>
