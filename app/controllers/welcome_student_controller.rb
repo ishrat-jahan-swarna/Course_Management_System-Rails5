@@ -3,6 +3,7 @@ class WelcomeStudentController < ApplicationController
   skip_before_action  :authorize
 
   @@selected_courses = []
+  @@selected_courses_backlog = []
 
   def index
     cuser = User.find_by(id: session[:user_id])
@@ -47,7 +48,6 @@ class WelcomeStudentController < ApplicationController
 
   def sel_to_enroll
     @course = Course.find(params[:course_id])
-    puts @course
     @@selected_courses.append(@course)
   end
 
@@ -64,6 +64,15 @@ class WelcomeStudentController < ApplicationController
     end
     @@selected_courses = []
     redirect_to welcome_student_index_path
+  end
+
+  def sel_for_backlog
+    @course = Course.find(params[:course_id])
+    @@selected_courses_backlog.append(@course)
+  end
+
+  def reg_backlog
+    @user = User.find(params[:u_id])
   end
 
   def course_status
@@ -92,7 +101,7 @@ class WelcomeStudentController < ApplicationController
     @user_all_fail_info = []
     @user_all_fail.each do |uc|
       @c = Course.find_by(id: uc.course_id)
-      @user_all_fail_info.append(code:@c.code, title:@c.title)
+      @user_all_fail_info.append(c_id:@c.id, code:@c.code, title:@c.title)
     end
   end
 
