@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post 'users/approve_user'
   post 'users/set_fail'
   post 'users/set_pass'
+  get 'welcome_student/course_status'
   post 'welcome_student/course_status'
   get 'courses/show_courses_user'
   get 'courses/show_user'
