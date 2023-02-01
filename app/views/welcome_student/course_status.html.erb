@@ -24,10 +24,28 @@
         <% end %> <br>
     </div>
     <div class="col">
-        <h5>Courses you need to register for Backlog</h5>
+        <h5>Courses you need to pass through Backlog</h5>
+        <p>Note: You can select at most three courses at a time.</p>
         <% if @user_all_fail.count == 0 %>
             <p class="card-text">Nothing to show now.</p>
         <% else %>
+            <% if @user_curr_registered_log_info.count > 0 %>
+                <ul class="list-group">
+                <% @user_curr_registered_log_info.each do |uc| %>
+                <li class="list-group-item">
+                    <div class="row">
+                    <div class="col">
+                    <%= uc[:code] %><br><%= uc[:title] %><br>
+                    </div>
+                    <div class="col" style="text-align:right">
+                        <b>Already registered</b><br>
+                        <b>Result: <%= uc[:status] %>
+                    </div>
+                    </div>
+                </li>
+                <% end %>
+                </ul>
+            <% end %>
             <ul class="list-group">
               <% @user_all_fail_info.each do |uc| %>
                 <li class="list-group-item">
