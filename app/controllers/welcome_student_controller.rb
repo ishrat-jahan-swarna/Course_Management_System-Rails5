@@ -92,7 +92,7 @@ class WelcomeStudentController < ApplicationController
     @user_all_fail_info = []
     @user_all_fail.each do |uc|
       @c = Course.find_by(id: uc.course_id)
-      @user_all_fail_info.append(code:@c.code, title:@c.title)
+      @user_all_fail_info.append(c_id:@c.id, code:@c.code, title:@c.title)
     end
   end
 
