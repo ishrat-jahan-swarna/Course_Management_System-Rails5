@@ -3,6 +3,7 @@ class WelcomeStudentController < ApplicationController
   skip_before_action  :authorize
 
   @@selected_courses = []
+  @@selected_courses_backlog = []
 
   def index
     cuser = User.find_by(id: session[:user_id])
@@ -47,7 +48,6 @@ class WelcomeStudentController < ApplicationController
 
   def sel_to_enroll
     @course = Course.find(params[:course_id])
-    puts @course
     @@selected_courses.append(@course)
   end
 
@@ -66,12 +66,32 @@ class WelcomeStudentController < ApplicationController
     redirect_to welcome_student_index_path
   end
 
+  def sel_for_backlog
+    @course = Course.find(params[:course_id])
+    @@selected_courses_backlog.append(@course)
+  end
+
+  def reg_backlog
+    @user = User.find(params[:u_id])
+    @ucs = @user.user_profile.current_semester
+
+    if @@selected_courses_backlog.count <= 3
+      @@selected_courses_backlog.each do |sc|
+        CourseUser.create(course_id: sc.id, user_id: @user.id, semester: -@ucs)
+      end
+    end
+    @@selected_courses_backlog = []
+
+    redirect_to welcome_student_course_status_path(u_id:@user.id)
+  end
+
   def course_status
     @user = User.find(params[:u_id])
     @ucs = @user.user_profile.current_semester
     @user_curr_pass = CourseUser.where(user_id:@user.id, semester:@ucs, result:1)
     @user_all_pass = CourseUser.where(user_id:@user.id, result:1)
     @user_all_fail = CourseUser.where(user_id:@user.id, result:2)
+    @user_curr_registered_log = CourseUser.where(user_id:@user.id, semester:-@ucs, result:0)
 
     @user_curr_pass_info = []
     @user_curr_pass.each do |uc|
@@ -80,7 +100,7 @@ class WelcomeStudentController < ApplicationController
     end
 
     @user_all_pass_info = []
-    if @user_all_pass_info.count 
+    if @user_all_pass.count 
       @user_all_pass.each do |uc|
         @c = Course.find_by(id: uc.course_id)
         if uc.semester < @ucs
@@ -93,6 +113,12 @@ class WelcomeStudentController < ApplicationController
     @user_all_fail.each do |uc|
       @c = Course.find_by(id: uc.course_id)
       @user_all_fail_info.append(c_id:@c.id, code:@c.code, title:@c.title)
+    end
+
+    @user_curr_registered_log_info = []
+    @user_curr_registered_log.each do |uc|
+      @c = Course.find_by(id: uc.course_id)
+      @user_curr_registered_log_info.append(c_id:@c.id, code:@c.code, title:@c.title, status:"pending")
     end
   end
 

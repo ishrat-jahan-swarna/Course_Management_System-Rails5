@@ -69,6 +69,7 @@
                         <br><b>Result: <%= uc[:status] %></b></li>
                       <% end %>
                     </ul>
+                    <br>
                     <%= button_to 'Enroll for new semester', welcome_student_available_courses_path(u_id: @user_id), :class => 'btn btn-primary btn-sm' %>
                   <% elsif @check == 2 %>
                     <h5 class="card-title">You haven't enrolled yet.</h5>
@@ -84,7 +85,7 @@
               <div class="card" style="width: 100%;">
                 <div class="card-body">
                     <% if @check==3 %>
-                      <h5 class="card-title>You have passed <%= @user_passed_courses.count %> courses.</h5>
+                      <h5 class="card-title">You have passed <%= @user_passed_courses.count %> courses.</h5>
                       <p class="card-text">You need to pass <%= dept.courses.count - @user_passed_courses.count %> courses more.</p>
                       <%= button_to 'See Details', welcome_student_course_status_path(u_id: @user), :class => "btn btn-primary btn-sm" %>
                     <% elsif @check==2 %>
