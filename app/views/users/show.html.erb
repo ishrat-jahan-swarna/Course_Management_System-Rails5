@@ -38,17 +38,38 @@
                   <div class="col" style="text-align:right">
                     <b>Set Result</b><br>
                     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                      <%= button_to 'Pass', users_set_pass_path(c_id: uc[:c_id], u_id: uc[:u_id]), :class => 'btn btn-success btn-sm' %>
-                      <%= button_to 'Fail', users_set_fail_path(c_id: uc[:c_id], u_id: uc[:u_id]), :class => 'btn btn-danger btn-sm' %>
+                      <%= button_to 'Pass', users_set_pass_path(c_id: uc[:c_id], u_id: uc[:u_id]), :class => 'btn btn-primary btn-sm' %>
+                      <%= button_to 'Fail', users_set_fail_path(c_id: uc[:c_id], u_id: uc[:u_id]), :class => 'btn btn-primary btn-sm' %>
                     </div>
                   </div>
                 </div>
               </li>
             <% end %>
           </ul>
+          <% if @user_curr_log_courses_info.count > 0 %>
+            <strong>Enrolled Courses for the current backlog: </strong>
+            <ul class="list-group">
+            <% @user_curr_log_courses_info.each do |uc| %>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col">
+                  <%= uc[:code] %><br><%= uc[:title] %><br>
+                  <b>Result: <%= uc[:status] %></b>
+                  </div>
+                  <div class="col" style="text-align:right">
+                    <b>Set Result</b><br>
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                      <%= button_to 'Pass', users_set_pass_log_path(c_id: uc[:c_id], u_id: uc[:u_id], sem: uc[:semester]), :class => 'btn btn-primary btn-sm' %>
+                      <%= button_to 'Fail', users_set_fail_log_path(c_id: uc[:c_id], u_id: uc[:u_id], sem: uc[:semester]), :class => 'btn btn-primary btn-sm' %>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+            </ul>
+          <% end %>
         <% end %> <br>
       </p>
-      <!-- want to show the courses in the current Semester -->
 
     <% elsif @user.user_profile && @user.user_profile.approved==false %>
       <p>

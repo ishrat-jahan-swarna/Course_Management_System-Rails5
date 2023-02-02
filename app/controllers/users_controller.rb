@@ -15,6 +15,7 @@ class UsersController < ApplicationController
   # GET /users/1 or /users/1.json
   def show
     @ucs = @user.user_profile.current_semester
+
     @user_curr_courses = CourseUser.where(user_id: @user.id, semester: @ucs)
     @user_curr_courses_info = []
     @user_curr_courses.each do |uc|
@@ -26,6 +27,19 @@ class UsersController < ApplicationController
         @s = "failed"
       end
       @user_curr_courses_info.append(code:@c.code, title:@c.title, status:@s, c_id: @c.id, u_id:@user.id)
+    end
+
+    @user_curr_log_courses = CourseUser.where(user_id:@user.id, semester:-@ucs)
+    @user_curr_log_courses_info = []
+    @user_curr_log_courses.each do |uc|
+      @c = Course.find_by(id: uc.course_id)
+      @s = "pending"
+      if uc.result == 1
+        @s = "passed"
+      elsif uc.result == 2
+        @s = "failed"
+      end
+      @user_curr_log_courses_info.append(code:@c.code, title:@c.title, status:@s, c_id: @c.id, u_id:@user.id, semester:uc.semester)
     end
   end
 
@@ -42,6 +56,24 @@ class UsersController < ApplicationController
     @user = User.find(params[:u_id])
     @course = Course.find(params[:c_id])
     @uc = CourseUser.where(user_id: @user.id, course_id: @course.id)
+    @uc[0].result = 2
+    @uc[0].save!
+    redirect_to @user
+  end
+
+  def set_pass_log
+    @user = User.find(params[:u_id])
+    @course = Course.find(params[:c_id])
+    @uc = CourseUser.where(user_id: @user.id, course_id: @course.id, semester: params[:sem])
+    @uc[0].result = 1 
+    @uc[0].save!
+    redirect_to @user
+  end
+
+  def set_fail_log
+    @user = User.find(params[:u_id])
+    @course = Course.find(params[:c_id])
+    @uc = CourseUser.where(user_id: @user.id, course_id: @course.id, semester: params[:sem])
     @uc[0].result = 2
     @uc[0].save!
     redirect_to @user

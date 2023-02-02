@@ -47,7 +47,7 @@
                 </ul>
             <% end %>
             <ul class="list-group">
-              <% @user_all_fail_info.each do |uc| %>
+              <% @user_need_reg_info.each do |uc| %>
                 <li class="list-group-item">
                   <div class="row">
                     <div class="col">
@@ -61,7 +61,11 @@
               <% end %>
             </ul>
             <br>
-            <%= button_to 'Register for Backlog', welcome_student_reg_backlog_path(u_id: @user.id), :class => 'btn btn-primary btn-sm' %>
+            <% if @user_need_reg_info.count==0 %>
+                <b>You have passed all the courses. You don't need to register for backlog.</b>
+            <% else %>
+                <%= button_to 'Register for Backlog', welcome_student_reg_backlog_path(u_id: @user.id), :class => 'btn btn-primary btn-sm' %>
+            <% end %>
         <% end %> <br>
     </div>
 </div>

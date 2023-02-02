@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   post 'welcome_student/reg_backlog'
   post 'welcome_student/sel_for_backlog'
   post 'users/approve_user'
+  post 'users/set_fail_log'
+  post 'users/set_pass_log'
   post 'users/set_fail'
   post 'users/set_pass'
   get 'welcome_student/course_status'
