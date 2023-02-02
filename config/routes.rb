@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :chatrooms
   resources :user_profiles
   post 'welcome_student/reg_backlog'
   post 'welcome_student/sel_for_backlog'
