@@ -1,17 +1,18 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <%= link_to 'Home', welcome_student_index_path, :class => "navbar-brand" %></li>
+    <%= link_to 'Home', welcome_student_index_path, :class => "navbar-brand" %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
       <% if @check==3 %>
-        <%= link_to 'Courses', course_dept_show_courses_user_path(dept_id: @user.user_profile.department_id ), :class => "nav-link" %></li>
+        <li><%= link_to 'Courses', course_dept_show_courses_user_path(dept_id: @user.user_profile.department_id ), :class => "nav-link" %></li>
+        <li><%= link_to 'Chatrooms', chatrooms_url(u_id: @user_id), :class => "nav-link" %></li>
       <% elsif @check==2 %>
-        <%= link_to 'Courses', course_dept_show_courses_user_path(dept_id: "-2" ), :class => "nav-link" %></li>  
+        <li><%= link_to 'Courses', course_dept_show_courses_user_path(dept_id: "-2" ), :class => "nav-link" %></li>
       <% else %>
-        <%= link_to 'Courses', course_dept_show_courses_user_path(dept_id: "-1" ), :class => "nav-link" %></li>  
+        <li><%= link_to 'Courses', course_dept_show_courses_user_path(dept_id: "-1" ), :class => "nav-link" %></li>
       <% end %>
       </ul>
     </div>

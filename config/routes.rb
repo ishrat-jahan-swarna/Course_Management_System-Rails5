@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :chatrooms
+  get 'chatroom_users/create'
+  get 'chatroom_users/destroy'
+  resources :chatrooms do
+    resource :chatroom_users
+    resources :messages
+  end
   resources :user_profiles
   post 'welcome_student/reg_backlog'
   post 'welcome_student/sel_for_backlog'

@@ -1,5 +1,10 @@
 class ChatroomsController < ApplicationController
+  skip_before_action  :authorize
+  skip_before_action  :authorize_user
   before_action :set_chatroom, only: %i[ show edit update destroy ]
+  before_action :set_user
+
+  layout 'chatbox'
 
   # GET /chatrooms or /chatrooms.json
   def index
@@ -8,6 +13,7 @@ class ChatroomsController < ApplicationController
 
   # GET /chatrooms/1 or /chatrooms/1.json
   def show
+    @messages = @chatroom.messages.order(created_at: :desc).limit(100).reverse
   end
 
   # GET /chatrooms/new
