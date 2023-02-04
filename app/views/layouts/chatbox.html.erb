@@ -20,6 +20,7 @@
         <div class="col-sm-2">
         <% if @cuser %>
             <h5>Chatrooms</h5>
+            <b> - for <%= @cuser.name %></b>
             <ul>
             <% @cuser.chatrooms.each do |chatroom|%>
                 <li><%= link_to chatroom.name, chatroom %></li>
