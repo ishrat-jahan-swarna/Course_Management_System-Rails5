@@ -1,4 +1,5 @@
 class UserProfilesController < ApplicationController
+  skip_before_action :authenticate_admin!
   before_action :set_user_profile, only: %i[ show edit update destroy ]
 
   # GET /user_profiles or /user_profiles.json

@@ -1,13 +1,12 @@
 class MessagesController < ApplicationController
-  skip_before_action  :authorize
+  skip_before_action  :authenticate_admin!
   before_action :set_chatroom
-  include CurrentUser
-  before_action :set_user
 
   def create
     message = @chatroom.messages.new(message_params)
-    message.user = @cuser
+    message.user = current_user
     message.save
+    MessageRelayJob.perform_later(message)
 
   end
 

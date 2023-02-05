@@ -1,4 +1,7 @@
 class CourseDeptController < ApplicationController
+  skip_before_action :authenticate_admin!, only: [:show_courses_user]
+  skip_before_action :authenticate_user! , only: [:index, :show_courses, :sel_course, :add_course, :remove_course]
+  
   @@selected_courses = []
 
   def index

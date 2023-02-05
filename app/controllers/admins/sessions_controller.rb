@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-class Users::SessionsController < Devise::SessionsController
+class Admins::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
   def after_sign_up_path_for(resource)
     # add your logic here.
-    welcome_student_index_path
+    welcome_index_path
   end
 
   def after_sign_in_path_for(resource)
     # add your logic here.
-    welcome_student_index_path
+    welcome_index_path
   end
 
   def after_sign_out_path_for(resource)
@@ -18,7 +18,6 @@ class Users::SessionsController < Devise::SessionsController
     first_index_path
   end
 
-  
   # GET /resource/sign_in
   # def new
   #   super

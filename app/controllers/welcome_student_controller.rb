@@ -1,5 +1,6 @@
 class WelcomeStudentController < ApplicationController
-
+  skip_before_action :authenticate_admin!
+  
   @@selected_courses = []
   @@selected_courses_backlog = []
 

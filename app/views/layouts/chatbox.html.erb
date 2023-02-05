@@ -18,12 +18,12 @@
     <div class="fluid-container">
     <div class="row">
         <div class="col-sm-2">
-        <% if @cuser %>
+        <% if user_signed_in? %>
             <h5>Chatrooms</h5>
-            <b> - for <%= @cuser.name %></b>
+            <b> - for <%= current_user.name %></b>
             <ul>
-            <% @cuser.chatrooms.each do |chatroom|%>
-                <li><%= link_to chatroom.name, chatroom %></li>
+            <% current_user.chatrooms.each do |chatroom|%>
+                <li><%= link_to chatroom.name, chatroom, data: {behavior: "chatroom-link", chatroom_id: chatroom.id} %></li>
             <% end %>
             </ul>
         <% end %>  

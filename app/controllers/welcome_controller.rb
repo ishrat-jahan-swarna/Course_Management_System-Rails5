@@ -1,10 +1,12 @@
 class WelcomeController < ApplicationController
-  skip_before_action  :authorize_user
+  skip_before_action  :authenticate_user!
   def index
-    cadmin = Admin.find_by(id: session[:admin_id])
-    @admin_name = cadmin.name
-    @admin_email = cadmin.email
+    if admin_signed_in?
+      cadmin = current_admin
+      @admin_name = cadmin.name
+      @admin_email = cadmin.email
 
-    @depts = Department.all
+      @depts = Department.all
+    end
   end
 end
