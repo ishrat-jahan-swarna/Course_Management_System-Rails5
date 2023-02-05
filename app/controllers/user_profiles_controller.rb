@@ -1,6 +1,4 @@
 class UserProfilesController < ApplicationController
-  skip_before_action  :authorize_user
-  skip_before_action  :authorize
   before_action :set_user_profile, only: %i[ show edit update destroy ]
 
   # GET /user_profiles or /user_profiles.json
@@ -14,15 +12,12 @@ class UserProfilesController < ApplicationController
 
   # GET /user_profiles/new
   def new
-    @user = User.find(params[:u_id])
-    @uid = @user.id
     @user_profile = UserProfile.new
   end
 
   # GET /user_profiles/1/edit
   def edit
-    @user = User.find(params[:u_id])
-    @uid = @user.id
+    @uid = current_user.id
     @dept_id = @user.user_profile.department_id
     @csem = @user.user_profile.current_semester
   end
@@ -30,6 +25,7 @@ class UserProfilesController < ApplicationController
   # POST /user_profiles or /user_profiles.json
   def create
     @user_profile = UserProfile.new(user_profile_params)
+    @user_profile.user_id = current_user.id
     respond_to do |format|
       if @user_profile.save
         format.html { redirect_to welcome_student_index_path(user_id: @user_profile.user.id), notice: "User profile was successfully created." }
@@ -72,6 +68,6 @@ class UserProfilesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_profile_params
-      params.require(:user_profile).permit(:current_semester, :blood_group, :address, :department_id, :user_id, :profile_picture)
+      params.require(:user_profile).permit(:current_semester, :blood_group, :address, :department_id, :profile_picture)
     end
 end

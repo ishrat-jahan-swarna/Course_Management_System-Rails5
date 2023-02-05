@@ -47,11 +47,11 @@
             <br><br>
           <% else %>
             <br>
-            <%= link_to "Want to set your profile?", new_user_profile_path(u_id: @user_id), :class => "link-primary" %>
+            <%= link_to "Want to set your profile?", new_user_profile_path, :class => "link-primary" %>
             <br>
           <% end %>
           <br>
-          <%= button_to 'Logout', logout_user_path, method: :delete, :class => "btn btn-danger" %>
+          <%= button_to 'Logout', destroy_user_session_path, method: :delete, :class => "btn btn-danger" %>
         </div>
 
         <div class="col-8">

@@ -1,7 +1,4 @@
 class CourseDeptController < ApplicationController
-  skip_before_action  :authorize
-  skip_before_action  :authorize_user
-
   @@selected_courses = []
 
   def index

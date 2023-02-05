@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: { sessions: 'users/sessions' }
   get 'chatroom_users/create'
   get 'chatroom_users/destroy'
   resources :chatrooms do
@@ -30,14 +31,6 @@ Rails.application.routes.draw do
   get 'course_dept/show_courses'
   get 'course_dept/index'
   get 'welcome/index'
-  controller :sessions do
-    get 'login' => :new
-    get 'login_user' => :new_user
-    post 'login' => :create
-    post 'login_user' => :create
-    delete 'logout' => :destroy
-    delete 'logout_user' => :destroy_user
-  end
   # get 'sessions/new'
   # get 'sessions/create'
   # get 'sessions/destroy'

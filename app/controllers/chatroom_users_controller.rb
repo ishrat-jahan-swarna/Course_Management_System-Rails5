@@ -1,6 +1,5 @@
 class ChatroomUsersController < ApplicationController
   skip_before_action  :authorize
-  skip_before_action  :authorize_user
   before_action :set_chatroom
   include CurrentUser
   before_action :set_user
