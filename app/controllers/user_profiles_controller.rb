@@ -19,8 +19,8 @@ class UserProfilesController < ApplicationController
   # GET /user_profiles/1/edit
   def edit
     @uid = current_user.id
-    @dept_id = @user.user_profile.department_id
-    @csem = @user.user_profile.current_semester
+    @dept_id = current_user.user_profile.department_id
+    @csem = current_user.user_profile.current_semester
   end
 
   # POST /user_profiles or /user_profiles.json

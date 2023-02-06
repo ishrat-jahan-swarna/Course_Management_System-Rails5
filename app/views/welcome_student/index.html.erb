@@ -8,7 +8,7 @@
       <ul class="navbar-nav">
       <% if @check==3 %>
         <li><%= link_to 'Courses', course_dept_show_courses_user_path(dept_id: @user.user_profile.department_id ), :class => "nav-link" %></li>
-        <li><%= link_to 'Chatrooms', chatrooms_url(u_id: @user_id), :class => "nav-link" %></li>
+        <li><%= link_to 'Chatrooms', chatrooms_url, :class => "nav-link" %></li>
       <% elsif @check==2 %>
         <li><%= link_to 'Courses', course_dept_show_courses_user_path(dept_id: "-2" ), :class => "nav-link" %></li>
       <% else %>

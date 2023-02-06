@@ -11,9 +11,9 @@ App.chatrooms = App.cable.subscriptions.create "ChatroomsChannel",
     if active_chatroom.length > 0
       active_chatroom.append(data.message)
     else
-      $("[data-behavior='chatroom-link'][data-chatroom-id = #{data.chatroom_id}]").css("font-weight", "bold")
+      $("[data-behavior='chatroom-link'][data-chatroom-id = '#{data.chatroom_id}']").css("font-weight", "bold")
     end
     # Called when there's incoming data on the websocket for this channel
   
   send_message: (chatroom_id, message) ->
-    @perform "send_message", {chatroom_id: chatroom_id, message: message}
+    @perform "send_message", {chatroom_id: chatroom_id, body: message}

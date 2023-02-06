@@ -6,13 +6,14 @@
 <% else %>
     <h6> You have to login first. </h6>
     <%= link_to 'Sign In User', new_user_session_path %>
+    <%= link_to 'Sign In Admin', new_admin_session_path %>
     <br><br>
     <h6>Don't have any account?</h6>
     <%= link_to 'Sign Up User', new_user_registration_path %>
 
-    <h6> You have to login first. </h6>
-    <%= link_to 'Sign In Admin', new_admin_session_path %>
+    <!-- <h6> You have to login first. </h6>-->
+    
     <br><br>
-    <h6>Don't have any account?</h6>
-    <%= link_to 'Sign Up Admin', new_admin_registration_path %>
+    <!-- <h6>Don't have any account?</h6>
+    <%= link_to 'Sign Up Admin', new_admin_registration_path %> -->
 <% end %>
