@@ -11,7 +11,7 @@
       <th>Code</th>
       <th>Title</th>
       <th>Credit</th>
-      <th colspan="1"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -21,6 +21,7 @@
         <td><%= course.code %></td>
         <td><%= course.title %></td>
         <td><%= course.credit %></td>
+        <td><b><%= course.option %></b></td>
         <td><%= link_to 'See Details', courses_show_courses_user_path(course: course), :class => "link-primary" %></td>
         </tr>       
     <% end %>

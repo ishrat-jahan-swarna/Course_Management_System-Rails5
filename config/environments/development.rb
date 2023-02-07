@@ -48,7 +48,6 @@ Rails.application.configure do
   config.active_record.verbose_query_logs = true
 
   #for action cable
-  config.action_cable.url = "ws://localhost:3000/cable"
 
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large

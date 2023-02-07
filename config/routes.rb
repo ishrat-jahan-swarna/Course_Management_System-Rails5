@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admins, controllers: { sessions: 'admins/sessions' }
   devise_for :users, controllers: { sessions: 'users/sessions' }
-  get 'chatroom_users/create'
-  get 'chatroom_users/destroy'
+
   resources :chatrooms do
     resource :chatroom_users
     resources :messages
@@ -32,9 +31,7 @@ Rails.application.routes.draw do
   get 'course_dept/show_courses'
   get 'course_dept/index'
   get 'welcome/index'
-  # get 'sessions/new'
-  # get 'sessions/create'
-  # get 'sessions/destroy'
+
   get 'first/index'
   root 'first#index'
   resources :admins
