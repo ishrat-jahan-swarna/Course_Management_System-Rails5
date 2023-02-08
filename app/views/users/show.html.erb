@@ -36,11 +36,15 @@
                   <b>Result: <%= uc[:status] %></b>
                   </div>
                   <div class="col" style="text-align:right">
-                    <b>Set Result</b><br>
-                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                      <%= button_to 'Pass', users_set_pass_path(c_id: uc[:c_id], u_id: uc[:u_id]), :class => 'btn btn-primary btn-sm' %>
-                      <%= button_to 'Fail', users_set_fail_path(c_id: uc[:c_id], u_id: uc[:u_id]), :class => 'btn btn-primary btn-sm' %>
-                    </div>
+                    <% if uc[:status]=="pending" %>
+                      <b>Set Result</b><br>
+                      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <%= button_to 'Pass', users_set_pass_path(c_id: uc[:c_id], u_id: uc[:u_id]), :class => 'btn btn-primary btn-sm' %>
+                        <%= button_to 'Fail', users_set_fail_path(c_id: uc[:c_id], u_id: uc[:u_id]), :class => 'btn btn-primary btn-sm' %>
+                      </div>
+                    <% else %>
+                      <b> Result has been updated. </b>
+                    <% end %>
                   </div>
                 </div>
               </li>
@@ -57,11 +61,15 @@
                   <b>Result: <%= uc[:status] %></b>
                   </div>
                   <div class="col" style="text-align:right">
-                    <b>Set Result</b><br>
-                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                      <%= button_to 'Pass', users_set_pass_log_path(c_id: uc[:c_id], u_id: uc[:u_id], sem: uc[:semester]), :class => 'btn btn-primary btn-sm' %>
-                      <%= button_to 'Fail', users_set_fail_log_path(c_id: uc[:c_id], u_id: uc[:u_id], sem: uc[:semester]), :class => 'btn btn-primary btn-sm' %>
-                    </div>
+                    <% if uc[:status] == "pending" %>
+                      <b>Set Result</b><br>
+                      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <%= button_to 'Pass', users_set_pass_log_path(c_id: uc[:c_id], u_id: uc[:u_id], sem: uc[:semester]), :class => 'btn btn-primary btn-sm' %>
+                        <%= button_to 'Fail', users_set_fail_log_path(c_id: uc[:c_id], u_id: uc[:u_id], sem: uc[:semester]), :class => 'btn btn-primary btn-sm' %>
+                      </div>
+                    <% else %>
+                      <b> Result has been updated. </b>
+                    <% end %>
                   </div>
                 </div>
               </li>
@@ -81,7 +89,9 @@
         <strong>Current Semester:</strong>
         <%= @user.user_profile.current_semester %>
       </p>
-      <%= button_to "Approve User", users_approve_user_path(u_id: @user.id), :class=>"btn btn-success btn-sm" %>
+      <%= button_to "Approve User", users_approve_user_path(u_id: @user.id), :class=>"btn btn-primary btn-sm" %>
+      <br>
+      <%= button_to "Reject User", users_reject_user_path(u_id: @user.id), :class=>"btn btn-danger btn-sm" %>
         
     <% else %>
       <p>User hasn't set profile yet.</p>        
@@ -93,6 +103,6 @@
 
 
 
-
+<br>
 <!-- <%= link_to 'Edit', edit_user_path(@user) %> | -->
 <%= link_to 'Back', users_path %>

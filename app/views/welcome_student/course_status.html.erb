@@ -6,7 +6,7 @@
         <% else %>
         <ul class="list-group">
             <% @user_curr_pass_info.each do |uc| %>
-            <li class="list-group-item"><%= uc[:code] %><br><%= uc[:title] %></li>
+                <li class="list-group-item"><%= uc[:code] %><br><%= uc[:title] %></li>
             <% end %>
         </ul>
         <% end %> <br>
@@ -18,7 +18,7 @@
         <% else %>
         <ul class="list-group">
             <% @user_all_pass_info.each do |uc| %>
-            <li class="list-group-item"><%= uc[:code] %><br><%= uc[:title] %></li>
+                <li class="list-group-item"><%= uc[:code] %><br><%= uc[:title] %></li>
             <% end %>
         </ul>
         <% end %> <br>
@@ -31,19 +31,19 @@
         <% else %>
             <% if @user_curr_registered_log_info.count > 0 %>
                 <ul class="list-group">
-                <% @user_curr_registered_log_info.each do |uc| %>
-                <li class="list-group-item">
-                    <div class="row">
-                    <div class="col">
-                    <%= uc[:code] %><br><%= uc[:title] %><br>
-                    </div>
-                    <div class="col" style="text-align:right">
-                        <b>Already registered</b><br>
-                        <b>Result: <%= uc[:status] %>
-                    </div>
-                    </div>
-                </li>
-                <% end %>
+                    <% @user_curr_registered_log_info.each do |uc| %>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col">
+                                    <%= uc[:code] %><br><%= uc[:title] %><br>
+                                </div>
+                                <div class="col" style="text-align:right">
+                                    <b>Already registered</b><br>
+                                    <b>Result: <%= uc[:status] %>
+                                </div>
+                            </div>
+                        </li>
+                    <% end %>
                 </ul>
             <% end %>
             <ul class="list-group">
