@@ -91,7 +91,7 @@
       </p>
       <%= button_to "Approve User", users_approve_user_path(u_id: @user.id), :class=>"btn btn-primary btn-sm" %>
       <br>
-      <%= button_to "Reject User", users_reject_user_path(u_id: @user.id), :class=>"btn btn-danger btn-sm" %>
+      <%= button_to "Reject User", users_reject_user_path(u_id: @user.id), :class=>"btn btn-danger btn-sm", remote: true %>
         
     <% else %>
       <p>User hasn't set profile yet.</p>        

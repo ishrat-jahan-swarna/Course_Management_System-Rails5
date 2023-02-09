@@ -37,6 +37,10 @@ class WelcomeStudentController < ApplicationController
     end
   end
 
+  def set_reject_msg
+    
+  end
+
   def available_courses
     @user = User.find(params[:u_id])
     @x = CourseUser.where(user_id: @user.id, semester: @user.user_profile.current_semester, result:0)

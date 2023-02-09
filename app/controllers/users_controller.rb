@@ -100,8 +100,12 @@ class UsersController < ApplicationController
     @user = User.find(params[:u_id])
     @up = UserProfile.find_by(user_id: @user.id)
     @up.approved = false
-    @up.save!
-    redirect_to @user
+    @up.save
+    respond_to do |format|
+      format.html{redirect_to @user}
+      format.js
+    end
+    
   end
 
   private
