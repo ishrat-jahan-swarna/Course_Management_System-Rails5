@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
+  get 'reject_profile_messages/create'
   devise_for :admins, controllers: { sessions: 'admins/sessions' }
   devise_for :users, controllers: { sessions: 'users/sessions' }
+  resources :users do
+    resources :reject_profile_messages
+  end
 
   resources :chatrooms do
     resource :chatroom_users
@@ -36,7 +40,6 @@ Rails.application.routes.draw do
   get 'first/index'
   root 'first#index'
   resources :admins
-  resources :users
   resources :departments
   resources :courses
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

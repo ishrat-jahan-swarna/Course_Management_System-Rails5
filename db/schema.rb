@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_05_164308) do
+ActiveRecord::Schema.define(version: 2023_02_10_053156) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -107,6 +107,14 @@ ActiveRecord::Schema.define(version: 2023_02_05_164308) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "reject_profile_messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+    t.bigint "user_id"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_reject_profile_messages_on_user_id"
+  end
+
   create_table "user_profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.integer "current_semester", null: false
     t.string "blood_group", null: false
@@ -140,6 +148,7 @@ ActiveRecord::Schema.define(version: 2023_02_05_164308) do
   add_foreign_key "course_users", "users"
   add_foreign_key "messages", "chatrooms"
   add_foreign_key "messages", "users"
+  add_foreign_key "reject_profile_messages", "users"
   add_foreign_key "user_profiles", "departments"
   add_foreign_key "user_profiles", "users"
 end
