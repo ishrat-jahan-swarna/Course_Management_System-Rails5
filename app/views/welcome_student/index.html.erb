@@ -43,10 +43,17 @@
             <br>
           <% elsif @check==2 %> 
             <br>
-            <b>You've set your profile. Please wait for admin approval.</b>
+            <% if @user.user_profile.checked==false && @user.reject_profile_messages[0] == nil %>
+              <b>You've set your profile. Please wait for admin approval.</b>
+            <% elsif @user.reject_profile_messages[0] != nil %>
+              <b>Admin has rejected your previous profile.</b><br>
+              <b>Message: </b>
+              <p><%= @user.reject_profile_messages[0].body %></p>
+              <br>
+              <%= link_to "Set your profile again", new_user_profile_path, :class => "link-primary" %>
+              <br>
+            <% end %>
             <br><br>
-
-
           <% else %>
             <br>
             <%= link_to "Want to set your profile?", new_user_profile_path, :class => "link-primary" %>

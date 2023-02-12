@@ -1,19 +1,21 @@
-<h1> Welcome to Online Course Management System </h1>
-<% if user_signed_in? %>
-    <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
-<% elsif admin_signed_in? %>
-    <%= link_to 'Sign Out', destroy_admin_session_path, method: :delete %>
-<% else %>
-    <h6> You have to login first. </h6>
-    <%= link_to 'Sign In User', new_user_session_path %>
-    <%= link_to 'Sign In Admin', new_admin_session_path %>
-    <br><br>
-    <h6>Don't have any account?</h6>
-    <%= link_to 'Sign Up User', new_user_registration_path %>
+<div>
+    <h1> Welcome to Online Course Management System </h1><br>
+    <% if user_signed_in? %>
+        <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %><br>
+    <% elsif admin_signed_in? %>
+        <%= link_to 'Sign Out', destroy_admin_session_path, method: :delete %><br>
+    <% else %>
+        <h6> You have to login first. </h6>
+        <%= link_to 'Sign In User', new_user_session_path %>
+        <%= link_to 'Sign In Admin', new_admin_session_path %>
+        <br><br>
+        <h6>Don't have any account?</h6>
+        <%= link_to 'Sign Up User', new_user_registration_path %>
 
-    <!-- <h6> You have to login first. </h6>-->
-    
-    <br><br>
-    <!-- <h6>Don't have any account?</h6>
-    <%= link_to 'Sign Up Admin', new_admin_registration_path %> -->
-<% end %>
+        <!-- <h6> You have to login first. </h6>-->
+        
+        <br><br>
+        <!-- <h6>Don't have any account?</h6>
+        <%= link_to 'Sign Up Admin', new_admin_registration_path %> -->
+    <% end %>
+</div>

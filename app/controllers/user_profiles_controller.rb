@@ -25,6 +25,11 @@ class UserProfilesController < ApplicationController
 
   # POST /user_profiles or /user_profiles.json
   def create
+    if UserProfile.find_by(user_id: current_user.id)
+      UserProfile.find_by(user_id: current_user.id).delete
+      @user = current_user
+      @user.reject_profile_messages[0].delete
+    end
     @user_profile = UserProfile.new(user_profile_params)
     @user_profile.user_id = current_user.id
     respond_to do |format|

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'reject_profile_messages/create'
   devise_for :admins, controllers: { sessions: 'admins/sessions' }
   devise_for :users, controllers: { sessions: 'users/sessions' }
   resources :users do
@@ -14,7 +13,6 @@ Rails.application.routes.draw do
   post 'welcome_student/reg_backlog'
   post 'welcome_student/sel_for_backlog'
   post 'users/approve_user'
-  post 'users/reject_user'
   post 'users/set_fail_log'
   post 'users/set_pass_log'
   post 'users/set_fail'

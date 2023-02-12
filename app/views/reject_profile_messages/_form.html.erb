@@ -1,0 +1,9 @@
+<%= form_with(model: [@user, reject_profile_message]) do |form| %>
+
+  <div class="field">
+    <%= form.label :body, "Enter valid reason", :class => "form-label" %>
+    <%= form.text_area :body, rows: 1, class: "form-control" %>
+  </div>
+  <%= form.submit "Send" %>
+
+<% end %>

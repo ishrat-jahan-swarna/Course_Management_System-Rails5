@@ -2,10 +2,17 @@ class RejectProfileMessagesController < ApplicationController
   skip_before_action  :authenticate_user!
   before_action :set_user
 
+  def new
+    puts @user
+    @reject_profile_message = @user.reject_profile_messages.new
+  end
+
   def create
-    reject_profile_message = RejectProfileMessage.new(reject_msg_params)
-    reject_profile_message.user = @user
-    reject_profile_message.save
+    @user.reject_profile_messages.delete_all
+    @reject_profile_message = @user.reject_profile_messages.new(reject_msg_params)
+    @reject_profile_message.save!
+    @user.user_profile.checked = true
+    redirect_to @user
   end
 
   private

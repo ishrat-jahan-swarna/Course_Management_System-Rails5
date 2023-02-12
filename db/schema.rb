@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_10_053156) do
+ActiveRecord::Schema.define(version: 2023_02_12_060758) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(version: 2023_02_10_053156) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "checked", default: false
     t.index ["department_id"], name: "index_user_profiles_on_department_id"
     t.index ["user_id"], name: "index_user_profiles_on_user_id"
   end
