@@ -3,11 +3,16 @@ class RejectProfileMessagesController < ApplicationController
   before_action :set_user
 
   def new
-    puts @user
+    puts "in new"
     @reject_profile_message = @user.reject_profile_messages.new
+    respond_to do |format|
+      format.html{redirect_to @user}
+      format.js
+    end
   end
 
   def create
+    puts "in create"
     @user.reject_profile_messages.delete_all
     @reject_profile_message = @user.reject_profile_messages.new(reject_msg_params)
     @reject_profile_message.save!

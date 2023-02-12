@@ -91,7 +91,7 @@
       <% if @user.reject_profile_messages[0] == nil %>
         <%= button_to "Approve User", users_approve_user_path(u_id: @user.id), :class=>"btn btn-primary btn-sm" %>
         <br>
-        <%= link_to "Reject User", new_user_reject_profile_message_path(@user) %>
+        <%= link_to "Reject User", new_user_reject_profile_message_path(@user), remote: true %>
         <br>
         <div id="send_reject_msg">
           <p></p>
