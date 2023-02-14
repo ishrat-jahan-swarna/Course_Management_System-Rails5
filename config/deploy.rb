@@ -8,7 +8,7 @@ set :repo_url, "https://github.com/ishrat-jahan-swarna/Course_Management_System-
 set :deploy_to, "/var/www/Course_Management_System-Rails5"
 
 set :use_sudo, true
-set :branch, 'master'
+set :branch, 'main'
 set :linked_files, %w{config/master.key config/database.yml}
 set :rails_env, 'production'
 set :keep_releases, 2
@@ -27,7 +27,7 @@ set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh
 set :puma_preload_app, true
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true  # Change to false when not using ActiveRecord
-
+set :rbenv_ruby, '2.7.6'
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
