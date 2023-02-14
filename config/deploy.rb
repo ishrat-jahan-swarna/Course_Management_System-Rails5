@@ -25,7 +25,8 @@ set :puma_access_log, "#{release_path}/log/puma.access.log"
 set :puma_error_log,  "#{release_path}/log/puma.error.log"
 set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
 set :puma_preload_app, true
-set :puma_worker_timeout, nilset :puma_init_active_record, true  # Change to false when not using ActiveRecord
+set :puma_worker_timeout, nil
+set :puma_init_active_record, true  # Change to false when not using ActiveRecord
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
