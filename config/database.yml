@@ -51,4 +51,4 @@ production:
   <<: *default
   database: Course_management_production
   username: Course_management
-  password: <%= ENV['COURSE_MANAGEMENT_DATABASE_PASSWORD'] %>
+  password: swarna33
